@@ -1,0 +1,10 @@
+.home{
+  display: flex;
+  /* margin: auto 0; */
+  min-height: 100vh;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #272b33;
+}
