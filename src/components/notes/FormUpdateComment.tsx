@@ -1,16 +1,18 @@
 "use client"
 import { updateOneNote } from '@/actions/crud'
+import { useAppContext } from '@/context/app.context'
 import { Loader } from 'lucide-react'
 import React, { useState } from 'react'
 
 const FormUpdateComment = ({ note, id }: { note: string, id: string }) => {
   const [noteUpdate, setNoteUpdate] = useState(note)
   const [statusLoading, setStatusLoading] = useState(false)
-  const [openNavard, setOpenNavbar] = useState(false)
+  const { changeRedirecMainStatus} = useAppContext()
 
   const updateNote = async (formData: FormData) => {
     await updateOneNote(id, formData.get('note') as string)
     setStatusLoading(false)
+    changeRedirecMainStatus(true)
   }
   return (
     <div>
