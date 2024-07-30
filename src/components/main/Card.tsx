@@ -1,6 +1,7 @@
 "use client"
 import { deleteOne } from '@/actions/crud'
-import { Delete, Loader, Trash, Trash2 } from 'lucide-react'
+import { Delete, Edit2, Loader, Trash, Trash2 } from 'lucide-react'
+import Link from 'next/link'
 import React, { useState } from 'react'
 
 const Card = ({ title, id }: { title: string, id: string }) => {
@@ -18,13 +19,16 @@ const Card = ({ title, id }: { title: string, id: string }) => {
         <h1 className='text-[15px] font-bold'>Title:</h1>
         <p className='text-[13px]'>{title}</p>
       </section>
-      <section onClick={() => deleteOneNote(id)}>
+      <section>
         {
           loading ?
             (<Loader size={15} className='animate-spin' />)
             :
             (
-              <Trash2 className='transition-all duration-150 hover:bg-red-600 rounded-sm text-red text-[red] hover:text-[white]' size={15} />
+              <div className='flex items-center justify-center gap-2'>
+                <Link href={`/notes/${id}`}><Edit2 className='cursor-pointer transition-all duration-150 hover:text-white text-yellow-500 hover:bg-yellow-600 rounded-sm ' size={15} /></Link>
+                <Trash2 onClick={() => deleteOneNote(id)} className=' cursor-pointer transition-all duration-150 hover:bg-red-600 rounded-sm text-red text-[red] hover:text-[white]' size={15} />
+              </div>
             )
         }
       </section>

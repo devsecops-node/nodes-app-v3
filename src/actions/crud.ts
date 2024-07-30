@@ -39,10 +39,41 @@ const deleteOne = async (id: string) => {
       }
     })
     revalidatePath('/')
-    return {status:true}
+    return { status: true }
   } catch (error) {
     console.log('error on createNote', error)
     return { status: false }
   }
 }
-export { getAllNotes, createNote,deleteOne }
+
+const getNote = async (id: string) => {
+  try {
+    const note = await prisma.notes.findUnique({
+      where: {
+        id
+      }
+    })
+    return { status: true, note }
+  } catch (error) {
+    console.log('error on ')
+    return { status: false }
+  }
+}
+const updateOneNote = async (id: string, noteUpdated: string) => {
+  try {
+    await prisma.notes.update({
+      where: {
+        id
+      },
+      data: {
+        note: noteUpdated
+      }
+    })
+    revalidatePath(`/notes/${id}`)
+    return { status: true }
+  } catch (error) {
+    return { status: false }
+  }
+}
+
+export { getAllNotes, createNote, deleteOne, getNote, updateOneNote }
