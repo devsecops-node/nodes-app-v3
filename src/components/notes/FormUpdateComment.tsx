@@ -9,7 +9,7 @@ const FormUpdateComment = ({ note, id }: { note: string, id: string }) => {
   const [openNavard, setOpenNavbar] = useState(false)
 
   const updateNote = async (formData: FormData) => {
-    const { status } = await updateOneNote(id, formData.get('note') as string)
+    await updateOneNote(id, formData.get('note') as string)
     setStatusLoading(false)
   }
   return (

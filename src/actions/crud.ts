@@ -56,7 +56,7 @@ const getNote = async (id: string) => {
     return { status: true, note }
   } catch (error) {
     console.log('error on ')
-    return { status: false }
+    return { status: false, note: undefined }
   }
 }
 const updateOneNote = async (id: string, noteUpdated: string) => {
