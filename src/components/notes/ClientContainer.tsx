@@ -36,7 +36,7 @@ const ClientContainer = ({ params, note }: ClientContainerProps) => {
               )
               :
               (
-                <p>Not so good</p>
+                <p>Parece que no hay una nota con ese id</p>
               )
           }
         </section>

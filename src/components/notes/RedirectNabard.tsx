@@ -9,14 +9,14 @@ const RedirectNabard = () => {
 
   const redirectToMain = () => {
     changeRedirecMainStatus(false)
-    router.push('/')
+    router.push('/notes')
   }
 
   return (
     <div className='p-3 h-full w-full outline-1 z-20  flex justify-center flex-col items-center absolute'>
       <p className='tracking-tighter font-bold text-green-700 text-[20px]'>Updateted succesfyllu</p>
       <p className='text-[12px]'>Info was updates succesfully</p>
-      <button onClick={() => redirectToMain()} className='text-white mt-2 bg-sky-700 rounded-md px-2 font-bold text-[15px] transition-all duration-150 hover:translate-y-[-4px]'>Redirec to Main</button>
+      <button onClick={() => redirectToMain()} className='text-white mt-2 bg-sky-700 rounded-md px-2 font-bold text-[15px] transition-all duration-150 hover:translate-y-[-4px]'>Redirec to Full notes</button>
     </div>
   )
 }

@@ -18,12 +18,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -31,15 +28,39 @@ body {
     text-wrap: balance;
   }
 }
-html,body{
+
+html,
+body {
   min-height: 100vh;
 }
 
-input{
+input {
   outline: none;
 }
 
 input[type=text]:focus {
   /* border: 1.2px solid #6acefa; */
- /*or outline: 2px solid #38bdf8; I think it is better because the border takes up space*/
+  /*or outline: 2px solid #38bdf8; I think it is better because the border takes up space*/
+}
+
+table {
+  caption-side: bottom;
+  width: 80%;
+  margin: 20px auto 0 auto;
+}
+
+thead>tr>th {
+  font-weight: normal;
+  font-size: 12px;
+  text-align: left;
+  color: #cccccc;
+}
+tr{
+  border-bottom: 1px solid #cccccc;
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
 }
