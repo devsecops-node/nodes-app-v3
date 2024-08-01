@@ -17,10 +17,14 @@ const getAllNotes = async () => {
   }
 }
 const createNote = async (formData: FormData) => {
+
   try {
     await prisma.notes.create({
       data: {
-        note: formData.get('title') as string
+        note: formData.get('title') as string,
+        complete: false,
+        title: "",
+        status : "medium",
       }
     })
     revalidatePath('/')

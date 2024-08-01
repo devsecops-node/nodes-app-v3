@@ -5,34 +5,31 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
-  output          = "./generated/client"
-  previewFeatures = ["fullTextIndex", "fullTextSearch"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider     = "mongodb"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model Notes {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  note      String
-  status    Status  @default(LOW)
-  type      Types?
-  completed Boolean
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  note     String
+  status   Status  @default(low)
+  complete Boolean
+  type     Type?
 }
 
 enum Status {
-  LOW
-  MEDIUM
-  HIGHT
+  low
+  medium
+  Hihgt
 }
 
-model Types {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  notes  Notes  @relation(fields: [noteId], references: [id])
-  noteId String @unique @db.ObjectId
+model Type {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  note     Notes  @relation(fields: [noteType], references: [id])
+  noteType String @unique @db.ObjectId
 }
