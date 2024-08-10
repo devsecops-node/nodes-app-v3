@@ -3,11 +3,13 @@ import { createNote } from '@/actions/crud'
 import { useAppContext } from '@/context/app.context'
 import React, { useState } from 'react'
 import ModalSetStatus, { StatusOptiosn } from './ModalSetStatus'
+import { useFormStatus } from 'react-dom'
 
 const ModalCreateNote = () => {
   const { changeCreateModalStatus } = useAppContext()
-
   const [typeOption, setTypeOption] = useState<StatusOptiosn>('low')
+  const [status, setStatus] = useState(false)
+
 
   const uploadForm = async (formData: FormData) => {
     const { status } = await createNote(formData, typeOption)
@@ -47,7 +49,9 @@ const ModalCreateNote = () => {
             name='comment'
             placeholder='Comment your note here ....' />
         </section>
-        <button type='submit' className='bg-sky-600 rounded-sm transition-all duration-150 hover:scale-105 '>Create</button>
+        <button type='submit' className='bg-sky-600 rounded-sm transition-all duration-150 hover:scale-105 disabled:bg-red-400'>
+          Create
+        </button>
       </form>
     </div >
   )
