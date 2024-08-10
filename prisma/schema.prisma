@@ -14,12 +14,14 @@ datasource db {
 }
 
 model Notes {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  note     String
-  status   Status  @default(low)
-  complete Boolean
-  type     Type?
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  note         String
+  status       Status  @default(low)
+  complete     Boolean
+  type         Type?
+  lastModified DateTime
+  create       DateTime
 }
 
 enum Status {

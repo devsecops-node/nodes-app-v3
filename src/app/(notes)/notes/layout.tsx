@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar';
 import React from 'react'
 
 export default function NotesLayout({
@@ -7,6 +8,7 @@ export default function NotesLayout({
 }>) {
   return (
     <main className=' min-h-screen  bg-[#282c34] '>
+      <Navbar />
       {children}
     </main>
   );

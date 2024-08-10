@@ -7,11 +7,10 @@ import ModalSetStatus, { StatusOptiosn } from './ModalSetStatus'
 const ModalCreateNote = () => {
   const { changeCreateModalStatus } = useAppContext()
 
-  const [modalType, setModalType] = useState(false)
   const [typeOption, setTypeOption] = useState<StatusOptiosn>('low')
 
   const uploadForm = async (formData: FormData) => {
-    const { status } = await createNote(formData)
+    const { status } = await createNote(formData, typeOption)
     if (status) {
       changeCreateModalStatus(false)
     }
@@ -19,7 +18,6 @@ const ModalCreateNote = () => {
 
   const assigTypeOption = (option: StatusOptiosn) => {
     setTypeOption(option)
-    setModalType(false)
   }
 
   return (
@@ -35,19 +33,7 @@ const ModalCreateNote = () => {
               type="text"
               name='title'
               placeholder='title your note here ....' />
-            <div
-              onMouseEnter={() => setModalType(true)}
-              className={`tracking-tighter flex items-center w-full cursor-pointer text-[10px] rounded-sm transition-all duration-150 ${modalType ? "opacity-[0.6] cursor-default" : ''}`}
-            >
-              <p className={`bg-slate-500 w-full h-full px-2 rounded-sm`}>Level your note</p>
-            </div>
-            {
-              modalType
-                ?
-                (<ModalSetStatus setStatus={assigTypeOption} />)
-                :
-                null
-            }
+            <ModalSetStatus setStatus={assigTypeOption} />
           </div>
         </section>
         <section className='flex flex-col'>

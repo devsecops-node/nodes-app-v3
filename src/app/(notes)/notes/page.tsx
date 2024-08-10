@@ -5,8 +5,10 @@ import React from 'react'
 const page = () => {
   return (
     <Container>
-      <h1 className='font-bold text-[16px]'>All your notes <span className='text-sky-600'>Configuration</span></h1>
-      <TableUi />
+      <div className='mt-[30px]'>
+        <h1  className='font-bold text-[16px]'>All your notes <span className='text-sky-600'>Configuration</span></h1>
+        <TableUi />
+      </div>
     </Container>
   )
 }

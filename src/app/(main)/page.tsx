@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <main className={`${style.home}`}>
       <Navbar />
-        <Presentation />
-        <Suspense fallback={<LoadingExample />}>
-          <RenderNotes />
-        </Suspense>
-        <CreateNoteButton />
+      <Presentation />
+      <Suspense fallback={<LoadingExample />}>
+        <RenderNotes />
+      </Suspense>
+      <CreateNoteButton />
     </main>
   );
 }

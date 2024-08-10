@@ -1,11 +1,13 @@
 import { getAllNotes } from '@/actions/crud'
-import { Edit, Trash } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
+import OptionsForms from './OptionsForms'
 
 
 const TableUi = async () => {
   const notes = await getAllNotes()
+
+
+  
   return (
     <table>
       <caption>All your notes here</caption>
@@ -13,6 +15,8 @@ const TableUi = async () => {
         <tr>
           <th scope='col'>Name</th>
           <th scope='col'>Status</th>
+          <th scope='col'>Created</th>
+          <th scope='col'>Last Modified</th>
           <th scope='col'>ID</th>
           <th scope='col'>Content</th>
           <th scope='col'>Actions</th>
@@ -22,20 +26,20 @@ const TableUi = async () => {
         {notes.data?.map((note) => (
           <tr className='transition-all duration-150 hover:bg-[#454c5a]' key={note.id}>
             <th className='font-normal overflow-x-hidden text-[10px] text-start '>{note.note}</th>
-            <th className='font-normal overflow-x-hidden text-[10px] text-start '>{note.id}</th>
-            <th className='font-normal overflow-x-hidden text-[10px] text-start '>Completed</th>
-            <th className='font-normal overflow-x-hidden text-[10px] text-start '>{note.note}</th>
+            <th className='font-normal overflow-x-hidden text-[10px] text-start '>{note.status}</th>
+            <th className='font-normal overflow-x-hidden text-[10px] text-start overflow-y-hidden'>
+              {note.create.toDateString()}
+              <span className='font-bold text-sky-600'>  {note.create.getHours().toString()}:{note.create.getMinutes().toString()}</span>
+            </th>
+            <th className='font-normal overflow-x-hidden text-[10px] text-start'>
+              {note.lastModified.toDateString()}
+              <span className='font-bold text-sky-600'>  {note.lastModified.getHours().toString()}:{note.lastModified.getMinutes().toString()}</span>
+            </th>
+            <th className='font-normal overflow-x-hidden text-[10px] text-start  '>{note.id}</th>
+            <th className='font-normal overflow-x-hidden text-[10px] text-start '>{note.note} </th>
             <th
               className='font-normal overflow-x-hidden text-[10px] text-start options'>
-              <span title='delete' className='p-[2px] bg-red-700 rounded-sm cursor-pointer hover:scale-105 hover:bg-red-500'>
-                <Trash className='' size={10} />
-              </span>
-                <span
-                  title='edith' className='p-[2px] bg-green-700 rounded-sm cursor-pointer hover:scale-105 hover:bg-green-500'>
-                  <Link href={`/notes/${note.id}`}>
-                  <Edit size={10} />
-                  </Link>
-                </span>
+                <OptionsForms noteId={note.id}/>
             </th>
           </tr>
         ))}

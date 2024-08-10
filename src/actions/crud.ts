@@ -1,5 +1,6 @@
 "use server"
 
+import { StatusOptiosn } from "@/components/main/ModalSetStatus"
 import { prisma } from "@/lib/prismadb"
 import { revalidatePath } from "next/cache"
 
@@ -16,15 +17,16 @@ const getAllNotes = async () => {
     return { status: false }
   }
 }
-const createNote = async (formData: FormData) => {
-
+const createNote = async (formData: FormData, status: StatusOptiosn) => {
   try {
     await prisma.notes.create({
       data: {
         note: formData.get('title') as string,
         complete: false,
         title: "",
-        status : "medium",
+        status,
+        create:new Date(),
+        lastModified:new  Date(),
       }
     })
     revalidatePath('/')
@@ -50,6 +52,7 @@ const deleteOne = async (id: string) => {
   }
 }
 
+
 const getNote = async (id: string) => {
   try {
     const note = await prisma.notes.findUnique({
@@ -70,7 +73,8 @@ const updateOneNote = async (id: string, noteUpdated: string) => {
         id
       },
       data: {
-        note: noteUpdated
+        note: noteUpdated,
+        lastModified: new Date()
       }
     })
     revalidatePath(`/notes/${id}`)
