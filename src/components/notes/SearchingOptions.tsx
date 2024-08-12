@@ -3,19 +3,29 @@ import React, { useState } from 'react'
 
 const SearchingOptions = () => {
   const [inputSearching, setInputSearching] = useState<string | undefined>(undefined)
+  const [statusModalSearch, setStatusModalSeach] = useState(false)
+
   return (
-    <section className='flex gap-1 relative items-center '>
+    <section className='flex gap-1 items-center'>
       <label htmlFor="findTitle" className='text-[12px]'>Find</label>
       <input
         id='findTitle'
         type="text"
         className='rounded-sm px-2 text-black text-[11px]'
         placeholder='find by title'
+        onClick={()=>setStatusModalSeach(true)}
         onChange={(e) => setInputSearching(e.target.value)}
       />
-      <div className='text-[12px] absolute bg-white'>
-        <p>qweqwe</p>
-      </div>
+      {statusModalSearch
+        ?
+        (
+          <div className='text-[12px] absolute mobile:top-6 top-9 right-0 min-w-[162px] bg-white text-black rounded-sm shadow-2xl '>
+            <p className='px-2'>qweqwe</p>
+          </div>
+        )
+        :
+        null
+      }
     </section>
   )
 }
