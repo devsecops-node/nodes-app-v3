@@ -1,9 +1,16 @@
 "use client"
+import { fintNoteByTitle } from '@/actions/crud'
 import React, { useState } from 'react'
 
 const SearchingOptions = () => {
   const [inputSearching, setInputSearching] = useState<string | undefined>(undefined)
   const [statusModalSearch, setStatusModalSeach] = useState(false)
+
+  const findNotes = async (title: string) => {
+    setInputSearching(title)
+    const notesFinded = await fintNoteByTitle(title)
+    console.log(notesFinded)
+  }
 
   return (
     <section className='flex gap-1 items-center'>
@@ -13,8 +20,9 @@ const SearchingOptions = () => {
         type="text"
         className='rounded-sm px-2 text-black text-[11px]'
         placeholder='find by title'
-        onClick={()=>setStatusModalSeach(true)}
-        onChange={(e) => setInputSearching(e.target.value)}
+        value={inputSearching}
+        onClick={() => setStatusModalSeach(true)}
+        onChange={async (e) => await findNotes(e.target.value)}
       />
       {statusModalSearch
         ?

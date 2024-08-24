@@ -25,8 +25,8 @@ const createNote = async (formData: FormData, status: StatusOptiosn) => {
         complete: false,
         title: "",
         status,
-        create:new Date(),
-        lastModified:new  Date(),
+        create: new Date(),
+        lastModified: new Date(),
       }
     })
     revalidatePath('/')
@@ -84,4 +84,17 @@ const updateOneNote = async (id: string, noteUpdated: string) => {
   }
 }
 
-export { getAllNotes, createNote, deleteOne, getNote, updateOneNote }
+// ? note === title
+const fintNoteByTitle = async (title: string) => {
+  try {
+    const allNotes = await getAllNotes()
+    if (allNotes.status) {
+      const findedNotes = allNotes.data?.map((dat) => dat.note.includes('title'))
+    }
+  } catch (er) {
+    console.log("error on fintNoteByTitle", er)
+    return { notes: undefined, status: true }
+  }
+}
+
+export { getAllNotes, createNote, deleteOne, getNote, updateOneNote, fintNoteByTitle }
